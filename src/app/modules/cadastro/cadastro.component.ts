@@ -68,7 +68,7 @@ export class CadastroComponent implements OnInit {
           (res) => {
             this.erroMessage = '';
             this.formCadastro.reset();
-            this.router.navigate(['login']);
+            this.router.navigate(['login', novoUsuario.name]);
         }, (err: HttpErrorResponse) => {
           this.erroMessage = err.error.body[0].message;
         }
