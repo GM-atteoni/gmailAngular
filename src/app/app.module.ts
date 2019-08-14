@@ -2,12 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LoginModule } from './modules/login/login.module';
-import { CaixaDeEntradaModule } from './modules/caixa-de-entrada/caixa-de-entrada.module';
-import { CadastroModule } from './modules/cadastro/cadastro.module';
-import { ModuloRoteamento } from './app.routes';
+import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app.routing.module';
+import { CadastroRoutingModule } from './modules/cadastro/cadastro-routing.module';
 
 @NgModule({
   declarations: [
@@ -16,10 +13,7 @@ import { ModuloRoteamento } from './app.routes';
   imports: [
     BrowserModule,
     FormsModule,
-    LoginModule,
-    CaixaDeEntradaModule,
-    CadastroModule,
-    ModuloRoteamento
+    AppRoutingModule
   ],
   providers: [
     

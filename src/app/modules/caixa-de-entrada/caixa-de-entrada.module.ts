@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CaixaDeEntradaComponent } from './caixa-de-entrada.component';
 import { FormsModule } from '@angular/forms';
 import { SharedComponentsModule } from "../../components/shared-components.module"; 
+import { CaixaDeEntradaRoutingModule } from './caixa-de-entrada-routing.module';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { SharedComponentsModule } from "../../components/shared-components.modul
   imports: [
     CommonModule,
     FormsModule,
-    SharedComponentsModule
+    SharedComponentsModule,
+    CaixaDeEntradaRoutingModule
   ],
   exports: [
     CaixaDeEntradaComponent

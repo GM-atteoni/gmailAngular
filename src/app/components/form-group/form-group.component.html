@@ -1,5 +1,5 @@
 <div class="cmailInputForm">
-    <div class="mdl-textfield mdl-textfield--floating-label" [ngClass]="{'is-invalid' : false}">
+    <div class="mdl-textfield mdl-textfield--floating-label" [ngClass]="{'is-invalid' : validacao || (validacaoTipo2.invalid && (validacaoTipo2.touched || validacaoTipo2.dirty))}">
         <ng-content></ng-content>
       <label class="mdl-textfield__label" for="para">{{label}}</label>
       <span class="mdl-textfield__formline"></span>

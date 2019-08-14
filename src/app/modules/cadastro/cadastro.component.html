@@ -2,26 +2,52 @@
   <cmail-header></cmail-header> 
   <main class="mdl-layout__content">
     <div class="page-content">
-      <div class="mdl-grid">
+      <div class="mdl-grid"> 
         <form [formGroup]="formCadastro" (ngSubmit)="enviaCadastro();"> 
-            <app-form-group label='E-mail: ' idCampo='email'>
-                <input formControlName="email" required name="email" cmailFormField>
-                <span class="mdl-textfield__error">Informar um email é obrigatório!</span>
-             </app-form-group>
 
-          <app-form-group label='Nome: ' idCampo='nome'>
-             <input formControlName="nome" required name="nome" cmailFormField>
-             <span class="mdl-textfield__error">Informar um nome é obrigatório!</span>
-          </app-form-group>
+          <app-form-group label='Nome: ' idCampo='nome' [validacao]="nome.invalid && (nome.touched || nome.dirty)">
+             <input formControlName="nome" name="nome" cmailFormField>
+             <span class="mdl-textfield__error">
+                <ng-container *ngIf="nome.getError('required')">Informar um nome é obrigatório. </ng-container>
+ 
+                <ng-container *ngIf="nome.getError('minlength')">Mínimo de 2 caracteres. </ng-container>
+   
+                <ng-container *ngIf="nome.getError('pattern')">O nome só pode conter letras. </ng-container>
+             </span>
+          </app-form-group> 
 
-          <app-form-group label='Senha: ' idCampo='senha'>
-              <input formControlName="senha" required email name="senha" type="password" cmailFormField>
+          <app-form-group label='Username: ' idCampo='user' [validacaoTipo2]="user">
+              <input formControlName="user" name="user" cmailFormField>
+              <span *ngIf="user.getError('required')" class="mdl-textfield__error">Informar um username é obrigatório!</span>
+              <span *ngIf="user.getError('minlength')" class="mdl-textfield__error">Mínimo de {{user.getError('minlength').requiredLength}} caracteres</span>
+              <span *ngIf="user.getError('maxlength')" class="mdl-textfield__error">Máximo de {{user.getError('maxlength').requiredLength}} caracteres</span>
+            </app-form-group>
+
+          <app-form-group label='Senha: ' idCampo='senha' [validacao]="senha.invalid && senha.touched">
+              <input formControlName="senha" name="senha" type="password" cmailFormField>
               <span class="mdl-textfield__error">Informar uma senha é obrigatório!</span>
            </app-form-group>
 
-           <app-form-group label='Avatar: ' idCampo='avatar'>
-              <input formControlName="avatar" required name="avatar" cmailFormField>
-              <span class="mdl-textfield__error">Informar um avatar é obrigatório!</span>
+           <app-form-group label='Telefone: ' idCampo='telefone' [validacaoTipo2]="telefone">
+              <input formControlName="telefone" name="telefone" cmailFormField>
+
+              <span *ngIf="telefone.getError('required')" class="mdl-textfield__error">Informar um telefone é obrigatório!</span>
+
+              <span *ngIf="telefone.getError('minlength') || telefone.getError('maxlength')" class="mdl-textfield__error">Telefone deve conter 9 dígitos</span>
+
+           </app-form-group>
+
+           <app-form-group label='Avatar: ' idCampo='avatar' [validacao]="avatar.invalid && avatar.touched">
+              <input formControlName="avatar" name="avatar" cmailFormField>
+
+              <span *ngIf="avatar.status === 'PENDING'" class="mdl-textfield__checking">Verificando...</span>
+
+              <span *ngIf="avatar.status === 'VALID'" class="mdl-textfield__valid">avatar válido</span>
+
+              <span *ngIf="avatar.getError('urlInvalida')" class="mdl-textfield__error">avatar inválido</span>
+
+              <span *ngIf="avatar.getError('required')" class="mdl-textfield__error">Informar um avatar é obrigatório!</span>
+
            </app-form-group>
  
           <div class="mdl-card__actions">

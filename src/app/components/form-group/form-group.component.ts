@@ -9,6 +9,12 @@ export class FormGroupComponent implements OnInit {
 
   @Input() label = '';
   @Input() idCampo = '';
+  @Input() validacao = false;
+  @Input() validacaoTipo2 = {
+    touched: false,
+    invalid: false,
+    dirty: false
+  };
 
   constructor() { }
 
