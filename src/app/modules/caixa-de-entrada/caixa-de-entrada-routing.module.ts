@@ -5,7 +5,7 @@ import { CaixaDeEntradaComponent } from './caixa-de-entrada.component';
 
 const routes: Routes = [
   {
-    path: '', component: CaixaDeEntradaComponent
+    path: '', component: CaixaDeEntradaComponent, pathMatch: 'full'
   }
 ];
 
