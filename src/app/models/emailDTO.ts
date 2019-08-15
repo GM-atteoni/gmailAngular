@@ -3,6 +3,10 @@ export class EmailDTO{
     subject = '';
     content = '';
 
+    created_at = '';
+    id = '';
+    from = '';
+
 
     constructor({destinatario, assunto, conteudo}){
         this.to = destinatario;

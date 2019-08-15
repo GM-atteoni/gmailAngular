@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { EmailServiceService } from 'src/app/services/email-service.service';
+import { EmailOutPutsDTO } from 'src/app/models/emailOutPutDTO';
 
 @Component({ 
   selector: 'app-caixa-de-entrada',
@@ -12,11 +13,14 @@ export class CaixaDeEntradaComponent implements OnInit {
   constructor(private emailService: EmailServiceService) { }
 
   ngOnInit() {
+    this.emailService.listar().subscribe((res) => {
+      this.listEmails = res;
+    })
   }
-
+ 
   private _isEmailFormOpen = false;
 
-  listEmails = [];
+  listEmails:EmailOutPutsDTO[];
 
   email = {
     destinatario: '',
@@ -57,10 +61,12 @@ export class CaixaDeEntradaComponent implements OnInit {
       console.log('nok')
     })
 
-    this.listEmails.push(novoEmail);
-
     formEmail.resetForm();
 
+  }
+
+  removeEmail(){
+    console.log('pai ok')
   }
 
 }

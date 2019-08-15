@@ -6,7 +6,7 @@ import { CaixaDeEntradaComponent } from './caixa-de-entrada.component';
 const routes: Routes = [
   {
     path: '', component: CaixaDeEntradaComponent, pathMatch: 'full'
-  }
+  },
 ];
 
 @NgModule({
@@ -14,3 +14,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class CaixaDeEntradaRoutingModule { }
+ 

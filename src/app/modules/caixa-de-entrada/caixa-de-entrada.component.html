@@ -2,14 +2,9 @@
     <cmail-header></cmail-header> 
     <main class="mdl-layout__content">
       <div class="page-content">
-          
-        <div>
-          <ul *ngFor="let email of listEmails">
-            <li> {{email.destinatario}} </li>
-            <li> {{email.assunto}} </li>
-            <li> {{email.conteudo}} </li>
-          </ul>
-        </div>
+
+        <app-cmail-list-item *ngFor="let email of listEmails" [destinatario]="email.destinatario" [assunto]="email.assunto"
+          [introducaoDoConteudo]="email.conteudo" [dataDeEnvio]="email.dataEnvio" (eventoRemoveEmail)="removeEmail();"></app-cmail-list-item>
   
         <div class="mdl-grid">
           <!-- Floating Multiline Textfield --> 
