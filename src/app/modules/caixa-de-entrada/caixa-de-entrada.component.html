@@ -3,7 +3,7 @@
     <main class="mdl-layout__content">
       <div class="page-content">
 
-        <app-cmail-list-item *ngFor="let email of listEmails" [destinatario]="email.destinatario" [assunto]="email.assunto"
+        <app-cmail-list-item *ngFor="let email of listEmails.reverse()" [destinatario]="email.destinatario" [assunto]="email.assunto"
           [introducaoDoConteudo]="email.conteudo" [dataDeEnvio]="email.dataEnvio" (eventoRemoveEmail)="removeEmail();"></app-cmail-list-item>
   
         <div class="mdl-grid">
