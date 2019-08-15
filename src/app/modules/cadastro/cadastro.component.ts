@@ -4,6 +4,8 @@ import { UserInputDTO } from 'src/app/models/user-input';
 import { HttpClient, HttpErrorResponse, HttpResponseBase } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { map, catchError } from "rxjs/operators";
+import { CadastroService } from 'src/app/services/cadastro.service';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -29,9 +31,12 @@ export class CadastroComponent implements OnInit {
   erroMessage: string = '';
 
   constructor(private httpClient: HttpClient,
-              private router:Router) { } 
+              private router:Router,
+              private cadastroService:CadastroService,
+              private loginService: LoginService) { } 
 
   ngOnInit() {
+      
   }
 
   //a ideia é fazer uma funçao que pega a url digitada pelo usuário e verifica se ao bater nela, vem sem erro (ou seja, 200). 
@@ -64,11 +69,25 @@ export class CadastroComponent implements OnInit {
     const novoUsuario = new UserInputDTO(dadosForm);
 
     if(this.formCadastro.valid){
-        this.httpClient.post("http://localhost:3200/users", novoUsuario).subscribe(
+        this.cadastroService.cadastrar(novoUsuario).subscribe(
           (res) => {
             this.erroMessage = '';
             this.formCadastro.reset();
-            this.router.navigate(['login', novoUsuario.name]);
+
+            var logUser:LoginInputDTO = {
+              email: novoUsuario.username,
+              password: novoUsuario.password,
+            }
+
+            this.loginService.autenticar(logUser).subscribe(
+              (resp: any) => {
+              this.router.navigate(['/caixa']);
+            }
+            ,(err) => {
+              this.router.navigate(['/login']);
+            }
+            )
+
         }, (err: HttpErrorResponse) => {
           this.erroMessage = err.error.body[0].message;
         }

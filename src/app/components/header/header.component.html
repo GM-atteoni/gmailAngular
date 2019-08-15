@@ -4,7 +4,7 @@
     </button>
   
     <div class="mdl-layout__header-row">
-      <span class="headerGlobal__title mdl-layout-title">Título da página atual</span>
+      <span class="headerGlobal__title mdl-layout-title">E-mails enviados</span>
   
       <div class="mdl-layout-spacer"></div>
   
@@ -28,26 +28,23 @@
       <img class="headerGlobal__logo" src="assets/img/logo.svg" alt="CMail">
     </span>
   
-    <header class="headerGlobal__userInfo">
-      <img src="http://placehold.it/48x48" class="headerGlobal__userInfoAvatar">
+    <header class="headerGlobal__userInfo">  
+      <img [src]="loggedUser.avatar" class="headerGlobal__userInfoAvatar">
       <div class="headerGlobal__userInfoData">
-        <h5 class="headerGlobal__userInfoDataName">Pessoa de Tal</h5>
-        <span>pesso.al@cmail.br</span>
+        <h5 class="headerGlobal__userInfoDataName">{{loggedUser.name}}</h5>
+        <span>{{loggedUser.email}}</span>
         <div class="mdl-layout-spacer"></div>
       </div>
     </header>
   
-    <nav class="mdl-navigation">
-      <a routerLink="/login" class="mdl-navigation__link">
+    <nav class="mdl-navigation"> 
+      <a routerLink="/" class="mdl-navigation__link">
         <span class="material-icons">person</span> Login
       </a>
-      <a routerLink="/cadastro" class="mdl-navigation__link">
-        <span class="material-icons">create</span> Cadastro
-      </a>
-      <a routerLink="/" class="mdl-navigation__link">
+      <a routerLink="/caixa" class="mdl-navigation__link">
         <span class="material-icons">inbox</span> Caixa de Entrada
       </a>
-      <a class="mdl-navigation__link">
+      <a routerLink="/logout" class="mdl-navigation__link">
         <span class="material-icons">logout</span> Logout
       </a> 
     </nav> 

@@ -1,23 +1,29 @@
 import { Routes, RouterModule } from "@angular/router";
 import { NgModule } from '@angular/core';
+import { AuthGuard } from './guards/auth.guard';
+import { LogoutGuard } from './guards/logout.guard';
 
 const rotasApp: Routes = [
     {
         path:'',
-        loadChildren: () => import('./modules/caixa-de-entrada/caixa-de-entrada.module').then(m => m.CaixaDeEntradaModule),
-        pathMatch: 'full'
-    },
-    {
-        path: 'login', 
-        loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule)
+        canActivate: [LogoutGuard],
+        loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule),
+        pathMatch: 'full',
     },
     {
         path: 'cadastro', 
         loadChildren: () => import('./modules/cadastro/cadastro.module').then(m => m.CadastroModule)
     },
     {
-        path: 'login/:username',
-        loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule)
+        path: 'caixa',
+        loadChildren: () => import('./modules/caixa-de-entrada/caixa-de-entrada.module').then(m => m.CaixaDeEntradaModule),
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'logout',
+        canActivate: [LogoutGuard],
+        loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule),
+        
     },
     {
         path: '**', redirectTo: '', pathMatch: 'full'
@@ -32,6 +38,10 @@ const rotasApp: Routes = [
     ],
     exports:[
         RouterModule
+    ],
+    providers: [
+        AuthGuard,
+        LogoutGuard
     ]
 })
 export class AppRoutingModule { }

@@ -9,14 +9,14 @@
 
       <form #handleLogin="ngForm" (ngSubmit)="login(handleLogin);" autocomplete="off" class="mdl-card__supporting-text">
 
-          <section *ngIf="mensagemErro" class="mdl-textfield is-invalid">
+            <section *ngIf="mensagemErro" class="mdl-textfield is-invalid">
               <p class="mdl-textfield__error">
                 {{mensagemErro}}
               </p>
-            </section>
-
+            </section> 
+ 
           <app-form-group label='E-mail: ' idCampo='email' [validacao]="email.invalid && (email.touched || email.dirty)">
-              <input #email="ngModel" email [(ngModel)]="username" name="email" required cmailFormField>
+              <input autofocus #email="ngModel" email [(ngModel)]="username" name="email" required cmailFormField>
               <span *ngIf="email.getError('required')" class="mdl-textfield__error">Informar um e-mail é obrigatório!</span>
               <span *ngIf="email.getError('email')" class="mdl-textfield__error">E-mail no formato incorreto!</span>
             </app-form-group>

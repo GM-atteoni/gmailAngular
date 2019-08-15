@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private http: HttpClient,
+  constructor(private loginService: LoginService,
               private route: Router) { }
 
   username: string = '';
@@ -20,19 +21,21 @@ export class LoginComponent implements OnInit {
   mensagemErro: string = null;
 
   ngOnInit() {
+    
   }
 
   login(form: NgForm){
 
+    var loginInput: LoginInputDTO = {
+      email: this.username, 
+      password: this.senha
+    };
+
     if(form.valid){
-      this.http.post('http://localhost:3200/login', {
-        email: this.username,
-        password: this.senha
-      })
+      this.loginService.autenticar(loginInput)
       .subscribe(
         (resp: any) => {
-        localStorage.removeItem("TOKEN");
-        localStorage.setItem("TOKEN", resp.token);
+        this.route.navigate(['/caixa']);
       }
       ,(err) => {
         this.mensagemErro = err.error.message;

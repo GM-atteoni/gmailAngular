@@ -12,7 +12,20 @@ export class HeaderComponent implements OnInit {
 
   isMenuOpen = false;
 
+  loggedUser: {
+    name: string, 
+    avatar: string,
+    email: string
+  } = {
+    name: '',
+    avatar: '',
+    email: ''
+  }
+
   ngOnInit() {
+    this.loggedUser.name = localStorage.getItem('NOME');
+    this.loggedUser.avatar = localStorage.getItem('AVATAR');
+    this.loggedUser.email = localStorage.getItem('EMAIL');
   }
 
   exibeMenu(){

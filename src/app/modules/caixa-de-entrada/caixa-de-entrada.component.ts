@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { EmailServiceService } from 'src/app/services/email-service.service';
 
 @Component({ 
   selector: 'app-caixa-de-entrada',
@@ -8,7 +9,7 @@ import { NgForm } from '@angular/forms';
 })
 export class CaixaDeEntradaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private emailService: EmailServiceService) { }
 
   ngOnInit() {
   }
@@ -48,6 +49,14 @@ export class CaixaDeEntradaComponent implements OnInit {
       assunto: this.email.assunto,
       conteudo: this.email.conteudo
     }
+
+    this.emailService.enviarEmail(novoEmail).subscribe((res) => {
+      console.log('ok')
+    },
+    (err) => {
+      console.log('nok')
+    })
+
     this.listEmails.push(novoEmail);
 
     formEmail.resetForm();
