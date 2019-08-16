@@ -33,4 +33,8 @@ export class EmailServiceService {
     )
   }
 
+  deletar(id){
+    return this.http.delete(`${this.url}/${id}`, this.headers);
+  }
+
 }

@@ -4,6 +4,7 @@ import { HeaderComponent } from "./header/header.component";
 import { RouterModule } from '@angular/router';
 import { FormGroupComponent } from './form-group/form-group.component';
 import { formFieldDirective } from './form-group/form-group.directive';
+import { PageDataService } from '../services/page-data.service';
 
 
 @NgModule({
@@ -20,6 +21,8 @@ import { formFieldDirective } from './form-group/form-group.directive';
     HeaderComponent,
     FormGroupComponent,
     formFieldDirective
+  ], providers: [
+    PageDataService
   ]
 })
 export class SharedComponentsModule { }

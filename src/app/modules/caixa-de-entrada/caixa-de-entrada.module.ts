@@ -7,13 +7,14 @@ import { CaixaDeEntradaRoutingModule } from './caixa-de-entrada-routing.module';
 import { EmailServiceService } from 'src/app/services/email-service.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CmailListItemComponent } from './cmail-list-item/cmail-list-item.component';
+import { EmailImportantPipe } from './cmail-list-item/email-important.pipe';
 
 
 @NgModule({ 
   declarations: [
     CaixaDeEntradaComponent,
-    CmailListItemComponent
-    
+    CmailListItemComponent,
+    EmailImportantPipe
   ],
   imports: [
     CommonModule,

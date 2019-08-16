@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { EmailServiceService } from 'src/app/services/email-service.service';
 import { EmailOutPutsDTO } from 'src/app/models/emailOutPutDTO';
+import { PageDataService } from 'src/app/services/page-data.service';
 
 @Component({ 
   selector: 'app-caixa-de-entrada',
@@ -10,16 +11,19 @@ import { EmailOutPutsDTO } from 'src/app/models/emailOutPutDTO';
 })
 export class CaixaDeEntradaComponent implements OnInit {
 
-  constructor(private emailService: EmailServiceService) { }
+  constructor(private emailService: EmailServiceService,
+              private pageDataServico: PageDataService) { }
 
   ngOnInit() {
    this.listarEmails();
+
+   this.pageDataServico.atualizaTitulo('Caixa de Entrada');
   }
 
   
   private _isEmailFormOpen = false;
   
-  listEmails:EmailOutPutsDTO[];
+  listEmails:EmailOutPutsDTO[] = [];
   
   email = {
     destinatario: '',
@@ -30,6 +34,14 @@ export class CaixaDeEntradaComponent implements OnInit {
   listarEmails(){
     this.emailService.listar().subscribe((res) => {
       this.listEmails = res;
+    })
+  }
+
+  textoDigitadoFilter: string = '';
+  
+  listaFiltrada(){
+    return this.listEmails.filter((email) => {
+      return email.assunto.includes(this.textoDigitadoFilter) || email.conteudo.includes(this.textoDigitadoFilter) || email.destinatario.includes(this.textoDigitadoFilter);
     })
   }
 
@@ -70,8 +82,13 @@ export class CaixaDeEntradaComponent implements OnInit {
 
   }
 
-  removeEmail(){
-    console.log('pai ok')
+  removeEmail(id){
+
+    this.emailService.deletar(id).subscribe((res) => {
+      this.listarEmails();
+    },(err) => {
+      alert('Erro ao deletar email');
+    })
   }
 
 }

@@ -17,11 +17,11 @@ export class CmailListItemComponent implements OnInit {
   @Input() assunto = '';
   @Input() introducaoDoConteudo = '';
   @Input() dataDeEnvio = '';
-  @Output('eventoRemoveEmail') removeEmail = new EventEmitter();
+  @Output() eventoRemoveEmail = new EventEmitter();
 
   clickBotaoRemover(){
     if(confirm('Tem certeza?')){
-      this.removeEmail.emit('removing');
+      this.eventoRemoveEmail.emit();
     }
   }
 

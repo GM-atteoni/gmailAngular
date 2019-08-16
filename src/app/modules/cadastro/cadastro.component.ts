@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { map, catchError } from "rxjs/operators";
 import { CadastroService } from 'src/app/services/cadastro.service';
 import { LoginService } from 'src/app/services/login.service';
+import { PageDataService } from 'src/app/services/page-data.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -33,10 +34,11 @@ export class CadastroComponent implements OnInit {
   constructor(private httpClient: HttpClient,
               private router:Router,
               private cadastroService:CadastroService,
-              private loginService: LoginService) { } 
+              private loginService: LoginService,
+              private pageDataService: PageDataService) { } 
 
   ngOnInit() {
-      
+      this.pageDataService.atualizaTitulo('Cadastro');
   }
 
   //a ideia é fazer uma funçao que pega a url digitada pelo usuário e verifica se ao bater nela, vem sem erro (ou seja, 200). 

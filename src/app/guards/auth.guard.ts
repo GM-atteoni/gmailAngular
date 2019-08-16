@@ -6,7 +6,6 @@ export class AuthGuard implements CanActivate{
 
     canActivate(){
         if(localStorage.getItem('TOKEN')){
-            console.log('ok')
             return true;
         }else{
             console.log('nok')

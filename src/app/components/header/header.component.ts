@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { PageDataService } from 'src/app/services/page-data.service';
 
 @Component({
   selector: 'cmail-header',
@@ -8,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { } 
+  constructor(private pageDataService: PageDataService) { 
+    this.pageDataService.titulo.subscribe(
+      (novoTitulo) => {
+        this.tituloHeader = novoTitulo;
+      }
+    );
+  } 
 
   isMenuOpen = false;
 
@@ -21,6 +28,10 @@ export class HeaderComponent implements OnInit {
     avatar: '',
     email: ''
   }
+  
+  tituloHeader = '';
+
+  @Output() enviaFiltro = new EventEmitter<string>();
 
   ngOnInit() {
     this.loggedUser.name = localStorage.getItem('NOME');
@@ -30,6 +41,10 @@ export class HeaderComponent implements OnInit {
 
   exibeMenu(){
     this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  handleBusca(inputValue){
+    this.enviaFiltro.emit(inputValue);
   }
 
 }

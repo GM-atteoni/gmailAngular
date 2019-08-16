@@ -4,19 +4,19 @@
     </button>
   
     <div class="mdl-layout__header-row">
-      <span class="headerGlobal__title mdl-layout-title">E-mails enviados</span>
+      <span class="headerGlobal__title mdl-layout-title">{{tituloHeader}}</span>
   
       <div class="mdl-layout-spacer"></div>
   
       <!-- Search -->
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
            mdl-textfield--floating-label mdl-textfield--align-right is-focused mdl-cell--hide-phone ">
-        <!--Para fechar remover is-focused-->
+        <!--Para fechar remover is-focused--> 
         <label class="mdl-button mdl-js-button mdl-button--icon" for="fixed-header-drawer-exp">
           <span class="material-icons">search</span>
         </label>
         <div class="mdl-textfield__expandable-holder">
-          <input class="headerSearch__input mdl-textfield__input" type="text" name="sample" id="fixed-header-drawer-exp"
+          <input (input)="handleBusca($event.target.value);" class="headerSearch__input mdl-textfield__input" type="text" name="sample" id="fixed-header-drawer-exp"
             placeholder="Filtrar e-mails...">
         </div>
       </div>
